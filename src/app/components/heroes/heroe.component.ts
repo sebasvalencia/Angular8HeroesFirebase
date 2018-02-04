@@ -26,10 +26,17 @@ export class HeroeComponent implements OnInit {
     this.route.params.subscribe(parametros => {
       console.log(parametros);
       this.id = parametros['id'];
+
+      if (this.id !== "nuevo") {
+        this._heroesService.getHeroe(this.id).subscribe(heroe => {
+          this.heroe = heroe
+        });
+      }
+
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   guardar() {
     console.log(this.heroe);
@@ -45,11 +52,22 @@ export class HeroeComponent implements OnInit {
     } else {
       //actualizando
       this._heroesService.actualizarHeroe(this.heroe, this.id)
-      .subscribe(data => {
-        console.log(data);
-      }, 
-      error=> console.error(error));
+        .subscribe(data => {
+          console.log(data);
+        },
+        error => console.error(error));
     }
   }
+
+  agregarNuevo(forma: NgForm) {
+
+    this.router.navigate(['/heroe', 'nuevo']);
+    //reset de la forma
+    forma.reset({
+      casa:'Marvel'
+    });
+  }
+
+
 
 }

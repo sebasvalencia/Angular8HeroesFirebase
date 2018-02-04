@@ -24,7 +24,8 @@ import { HeroeComponent } from './components/heroes/heroe.component';
   imports: [
     BrowserModule,
     AAP_ROUTING,
-    FormsModule 
+    FormsModule,
+    HttpModule
   ],
   providers: [
     HeroesService

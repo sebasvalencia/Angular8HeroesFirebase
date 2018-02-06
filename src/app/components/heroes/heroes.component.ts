@@ -12,25 +12,30 @@ import { Heroe } from '../../interfaces/heroe.interface';
 })
 export class HeroesComponent implements OnInit {
 
-  heroes:any;
+  heroes: any[] = [];
+  loading: boolean = true;
 
-  constructor(private _heroesService:HeroesService) { 
-    this._heroesService.getHeroes().subscribe(data =>{
+  constructor(private _heroesService: HeroesService) {
+
+    this._heroesService.getHeroes().subscribe(data => {
       console.log(data);
-      this.heroes = data;
+      setTimeout(() => {
+        this.heroes = data;
+        this.loading = false;
+      }, 3000);
     })
   }
 
   ngOnInit() {
   }
 
-  borraHeroe(key$:string){
-    this._heroesService.borrarHeroe(key$).subscribe( respuesta =>{
+  borraHeroe(key$: string) {
+    this._heroesService.borrarHeroe(key$).subscribe(respuesta => {
       //validar q si se quiee borrar
       console.log(respuesta);
-      if(respuesta){
+      if (respuesta) {
         console.error(respuesta);
-      }else{
+      } else {
         console.log("elimino bn");
         delete this.heroes[key$];
       }

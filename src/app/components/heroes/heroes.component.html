@@ -20,10 +20,10 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Casa</th>
-            <th scope="col">Opciones</th>
+            <th >#</th>
+            <th >Nombre</th>
+            <th >Casa</th>
+            <th class="text-right">Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +31,14 @@
             <td>{{i}}</td>
             <td>{{heroes[k].nombre}}</td>
             <td>{{heroes[k].casa}}</td>
-            <td></td>
+            <td class="text-right w120">
+              <button [routerLink]="['/heroe', k]"
+               type="button" class="btn btn-outline-success ">Editar</button>
+            </td>
+            <td>
+              <button (click)="borraHeroe(k)"
+               type="button" class="btn btn-outline-danger">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </table>
